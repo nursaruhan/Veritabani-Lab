@@ -1,0 +1,5 @@
+USE vtys7hafta
+GO
+INSERT INTO Siparis VALUES(1,20,GETDATE())
+SELECT * FROM Urun
+SELECT * FROM Siparis

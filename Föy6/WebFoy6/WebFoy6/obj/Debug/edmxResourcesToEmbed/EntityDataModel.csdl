@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="vtys6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tBolum">
+    <Key>
+      <PropertyRef Name="bolumID" />
+    </Key>
+    <Property Name="bolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bolumAd" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fakulteID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tFakulte" Relationship="Self.FK__tBolum__fakulteI__412EB0B6" FromRole="tBolum" ToRole="tFakulte" />
+    <NavigationProperty Name="tOgrencis" Relationship="Self.FK__tOgrenci__bolumI__440B1D61" FromRole="tBolum" ToRole="tOgrenci" />
+  </EntityType>
+  <EntityType Name="tFakulte">
+    <Key>
+      <PropertyRef Name="fakulteID" />
+    </Key>
+    <Property Name="fakulteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fakulteAd" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tBolums" Relationship="Self.FK__tBolum__fakulteI__412EB0B6" FromRole="tFakulte" ToRole="tBolum" />
+  </EntityType>
+  <EntityType Name="tOgrenci">
+    <Key>
+      <PropertyRef Name="ogrenciID" />
+    </Key>
+    <Property Name="ogrenciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bolumID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tBolum" Relationship="Self.FK__tOgrenci__bolumI__440B1D61" FromRole="tOgrenci" ToRole="tBolum" />
+  </EntityType>
+  <Association Name="FK__tBolum__fakulteI__412EB0B6">
+    <End Role="tFakulte" Type="Self.tFakulte" Multiplicity="1" />
+    <End Role="tBolum" Type="Self.tBolum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tFakulte">
+        <PropertyRef Name="fakulteID" />
+      </Principal>
+      <Dependent Role="tBolum">
+        <PropertyRef Name="fakulteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tOgrenci__bolumI__440B1D61">
+    <End Role="tBolum" Type="Self.tBolum" Multiplicity="1" />
+    <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tBolum">
+        <PropertyRef Name="bolumID" />
+      </Principal>
+      <Dependent Role="tOgrenci">
+        <PropertyRef Name="bolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="vtys6Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tBolums" EntityType="Self.tBolum" />
+    <EntitySet Name="tFakultes" EntityType="Self.tFakulte" />
+    <EntitySet Name="tOgrencis" EntityType="Self.tOgrenci" />
+    <AssociationSet Name="FK__tBolum__fakulteI__412EB0B6" Association="Self.FK__tBolum__fakulteI__412EB0B6">
+      <End Role="tFakulte" EntitySet="tFakultes" />
+      <End Role="tBolum" EntitySet="tBolums" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tOgrenci__bolumI__440B1D61" Association="Self.FK__tOgrenci__bolumI__440B1D61">
+      <End Role="tBolum" EntitySet="tBolums" />
+      <End Role="tOgrenci" EntitySet="tOgrencis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

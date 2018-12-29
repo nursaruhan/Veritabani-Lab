@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="vtys6ModelStoreContainer" CdmEntityContainer="vtys6Entities">
+    <EntitySetMapping Name="tBolums">
+      <EntityTypeMapping TypeName="vtys6Model.tBolum">
+        <MappingFragment StoreEntitySet="tBolum">
+          <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+          <ScalarProperty Name="bolumAd" ColumnName="bolumAd" />
+          <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tFakultes">
+      <EntityTypeMapping TypeName="vtys6Model.tFakulte">
+        <MappingFragment StoreEntitySet="tFakulte">
+          <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+          <ScalarProperty Name="fakulteAd" ColumnName="fakulteAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tOgrencis">
+      <EntityTypeMapping TypeName="vtys6Model.tOgrenci">
+        <MappingFragment StoreEntitySet="tOgrenci">
+          <ScalarProperty Name="ogrenciID" ColumnName="ogrenciID" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

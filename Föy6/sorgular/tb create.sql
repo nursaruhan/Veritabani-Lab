@@ -1,0 +1,20 @@
+USE vtys6hafta;
+CREATE TABLE tFakulte (
+fakulteID INT PRIMARY KEY NOT NULL,
+fakulteAd VARCHAR(35) NOT NULL 
+);
+CREATE TABLE tBolum (
+bolumID INT PRIMARY KEY NOT NULL, 
+bolumAd VARCHAR(35) NOT NULL, 
+fakulteID INT  NOT NULL, 
+FOREIGN KEY(fakulteID) REFERENCES tFakulte(fakulteID)
+);
+  
+CREATE TABLE tOgrenci (
+ogrenciID INT PRIMARY KEY NOT NULL,
+ad VARCHAR(25)NOT NULL, 
+soyad VARCHAR(30)NOT NULL, 
+bolumID INT NOT NULL, 
+FOREIGN KEY(bolumID) REFERENCES tBolum(bolumID)
+)
+

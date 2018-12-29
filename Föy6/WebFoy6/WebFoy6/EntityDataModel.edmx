@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="vtys6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tBolum">
+          <Key>
+            <PropertyRef Name="bolumID" />
+          </Key>
+          <Property Name="bolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bolumAd" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="fakulteID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tFakulte">
+          <Key>
+            <PropertyRef Name="fakulteID" />
+          </Key>
+          <Property Name="fakulteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fakulteAd" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tOgrenci">
+          <Key>
+            <PropertyRef Name="ogrenciID" />
+          </Key>
+          <Property Name="ogrenciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="soyad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="bolumID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tBolum__fakulteI__412EB0B6">
+          <End Role="tFakulte" Type="Self.tFakulte" Multiplicity="1" />
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFakulte">
+              <PropertyRef Name="fakulteID" />
+            </Principal>
+            <Dependent Role="tBolum">
+              <PropertyRef Name="fakulteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tOgrenci__bolumI__440B1D61">
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="1" />
+          <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="tOgrenci">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="vtys6ModelStoreContainer">
+          <EntitySet Name="tBolum" EntityType="Self.tBolum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tFakulte" EntityType="Self.tFakulte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOgrenci" EntityType="Self.tOgrenci" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tBolum__fakulteI__412EB0B6" Association="Self.FK__tBolum__fakulteI__412EB0B6">
+            <End Role="tFakulte" EntitySet="tFakulte" />
+            <End Role="tBolum" EntitySet="tBolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tOgrenci__bolumI__440B1D61" Association="Self.FK__tOgrenci__bolumI__440B1D61">
+            <End Role="tBolum" EntitySet="tBolum" />
+            <End Role="tOgrenci" EntitySet="tOgrenci" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="vtys6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tBolum">
+          <Key>
+            <PropertyRef Name="bolumID" />
+          </Key>
+          <Property Name="bolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bolumAd" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fakulteID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tFakulte" Relationship="Self.FK__tBolum__fakulteI__412EB0B6" FromRole="tBolum" ToRole="tFakulte" />
+          <NavigationProperty Name="tOgrencis" Relationship="Self.FK__tOgrenci__bolumI__440B1D61" FromRole="tBolum" ToRole="tOgrenci" />
+        </EntityType>
+        <EntityType Name="tFakulte">
+          <Key>
+            <PropertyRef Name="fakulteID" />
+          </Key>
+          <Property Name="fakulteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fakulteAd" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tBolums" Relationship="Self.FK__tBolum__fakulteI__412EB0B6" FromRole="tFakulte" ToRole="tBolum" />
+        </EntityType>
+        <EntityType Name="tOgrenci">
+          <Key>
+            <PropertyRef Name="ogrenciID" />
+          </Key>
+          <Property Name="ogrenciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bolumID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tBolum" Relationship="Self.FK__tOgrenci__bolumI__440B1D61" FromRole="tOgrenci" ToRole="tBolum" />
+        </EntityType>
+        <Association Name="FK__tBolum__fakulteI__412EB0B6">
+          <End Role="tFakulte" Type="Self.tFakulte" Multiplicity="1" />
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFakulte">
+              <PropertyRef Name="fakulteID" />
+            </Principal>
+            <Dependent Role="tBolum">
+              <PropertyRef Name="fakulteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tOgrenci__bolumI__440B1D61">
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="1" />
+          <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="tOgrenci">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="vtys6Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tBolums" EntityType="Self.tBolum" />
+          <EntitySet Name="tFakultes" EntityType="Self.tFakulte" />
+          <EntitySet Name="tOgrencis" EntityType="Self.tOgrenci" />
+          <AssociationSet Name="FK__tBolum__fakulteI__412EB0B6" Association="Self.FK__tBolum__fakulteI__412EB0B6">
+            <End Role="tFakulte" EntitySet="tFakultes" />
+            <End Role="tBolum" EntitySet="tBolums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tOgrenci__bolumI__440B1D61" Association="Self.FK__tOgrenci__bolumI__440B1D61">
+            <End Role="tBolum" EntitySet="tBolums" />
+            <End Role="tOgrenci" EntitySet="tOgrencis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="vtys6ModelStoreContainer" CdmEntityContainer="vtys6Entities">
+          <EntitySetMapping Name="tBolums">
+            <EntityTypeMapping TypeName="vtys6Model.tBolum">
+              <MappingFragment StoreEntitySet="tBolum">
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+                <ScalarProperty Name="bolumAd" ColumnName="bolumAd" />
+                <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tFakultes">
+            <EntityTypeMapping TypeName="vtys6Model.tFakulte">
+              <MappingFragment StoreEntitySet="tFakulte">
+                <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+                <ScalarProperty Name="fakulteAd" ColumnName="fakulteAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOgrencis">
+            <EntityTypeMapping TypeName="vtys6Model.tOgrenci">
+              <MappingFragment StoreEntitySet="tOgrenci">
+                <ScalarProperty Name="ogrenciID" ColumnName="ogrenciID" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
